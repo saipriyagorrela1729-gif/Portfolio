@@ -1,15 +1,10 @@
 {
   "version": 2,
-  "builds": [
+  "public": true,
+  "rewrites": [
     {
-      "src": "index.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/(.*)",
+      "destination": "/$1"
     }
   ],
   "headers": [
@@ -27,6 +22,28 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/styles.css",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/css; charset=UTF-8"
+        }
+      ]
+    },
+    {
+      "source": "/script.js",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript; charset=UTF-8"
         }
       ]
     }
